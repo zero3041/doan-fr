@@ -104,3 +104,47 @@ var productBig = new Swiper ('.big-image',{
         swiper: productThumb
     }
 })
+
+// Stock
+
+var stocks = document.querySelectorAll('.products .stock')
+for (let x = 0; x < stocks.length; x++) {
+    let stock = stocks[x].dataset.stock;
+    let available = stocks[x].querySelector('.qty-available').innerHTML
+    let sold = stocks[x].querySelector('.qty-sold').innerHTML
+    let percent = sold*100/stock
+
+    stocks[x].querySelector('.available').style.width = percent + '%';
+}
+
+
+
+const divtoShow = '.mini-cart';
+const divPopup = document.querySelector(divtoShow);
+const divTrigger = document.querySelector('.cart-trigger');
+
+divTrigger.addEventListener('click', () => {
+    setTimeout(() => { 
+        if(!divPopup.classList.contains('show')){
+            divPopup.classList.add('show');
+        }
+     }, 250 )
+})
+
+document.addEventListener('click', (e) => {
+    const isClosest = e.target.closest(divtoShow);
+    if(!isClosest && divPopup.classList.contains('show')) {
+        divPopup.classList.remove('show')
+    }
+})
+
+
+//  show modal
+
+
+window.onload = function () {
+    document.querySelector('.site').classList.toggle('showmodal')
+}
+document.querySelector('.modalclose').addEventListener('click', function(){
+    document.querySelector('.site').classList.remove('showmodal')
+})
